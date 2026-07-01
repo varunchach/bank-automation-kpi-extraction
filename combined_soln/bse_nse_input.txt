@@ -1,0 +1,7 @@
+# BSE/NSE PDF URLs for KPI report (one URL per line).
+# Order: IB Investor, IB CASA, PNB Investor, PNB CASA (optional: HDFC Investor, HDFC CASA)
+# Lines starting with # are ignored. Update URLs here to change app defaults.
+https://www.bseindia.com/xml-data/corpfiling/AttachHis/06fc511a-9d0e-43df-a830-13b9dea59cba.pdf
+https://www.bseindia.com/xml-data/corpfiling/AttachHis/7b26747e-1f53-4fc5-aa28-465e03617758.pdf
+https://www.bseindia.com/xml-data/corpfiling/AttachHis/aedaff30-a173-45db-ac13-188e1257f05c.pdf
+https://www.bseindia.com/xml-data/corpfiling/AttachHis/2e4de758-cbe7-4e01-82dd-7acca9ec9f2d.pdf

@@ -1,0 +1,3 @@
+# Keep downloads dir; PDFs are gitignored
+*
+!.gitkeep

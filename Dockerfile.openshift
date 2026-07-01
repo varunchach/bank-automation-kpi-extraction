@@ -1,0 +1,31 @@
+# OpenShift image: fast Docling (tables only, no OCR) to finish within route timeout.
+# Same base as Dockerfile; only CMD uses streamlit_app_openshift.py.
+FROM python:3.11-slim-bookworm
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libgl1-mesa-glx \
+    libglib2.0-0 \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir torch==2.5.1 torchvision==0.20.1 --index-url https://download.pytorch.org/whl/cpu
+RUN pip install --no-cache-dir -r requirements.txt
+
+ARG APP_BUILD=0
+RUN echo "App build: ${APP_BUILD}"
+COPY combined_soln/ combined_soln/
+COPY IB/ IB/
+COPY PNB/ PNB/
+COPY .streamlit/ combined_soln/.streamlit/
+
+ENV PYTHONPATH=/app:/app/IB:/app/PNB
+WORKDIR /app/combined_soln
+
+ENV STREAMLIT_SERVER_ADDRESS=0.0.0.0
+ENV STREAMLIT_SERVER_PORT=8501
+EXPOSE 8501
+
+# OpenShift: fast Docling (no full-page OCR) so report completes in time
+CMD ["streamlit", "run", "streamlit_app_openshift.py", "--server.headless=true"]

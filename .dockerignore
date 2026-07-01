@@ -1,0 +1,29 @@
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv
+venv
+env
+*.egg-info
+.eggs
+
+# Data & caches
+data/
+downloads/
+*.db
+milvus.db
+
+# IDE & misc
+.git
+.gitignore
+.cursor
+*.md
+*.ipynb
+*.xlsx
+
+# Exclude test/export scripts
+export_kpis_to_excel.py
+unified_kpi_notebook.ipynb

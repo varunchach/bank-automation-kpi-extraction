@@ -1,0 +1,4 @@
+# Fix 403 when app is opened in embedded browser (Cursor, VS Code, iframe)
+# XSRF protection blocks cross-origin requests; disable for local/dev use
+[server]
+enableXsrfProtection = false

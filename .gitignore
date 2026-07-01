@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Secrets & local config
+.env
+.env.local
+combined_soln/llm_config.local.py
+
+# Generated / runtime
+extracted_output/*
+!extracted_output/.gitkeep
+combined_soln/downloads/*
+!combined_soln/downloads/.gitkeep
+*.db
+milvus.db
+/tmp/
+
+# Large input PDFs (download via data/README URLs)
+data/*.pdf
+
+# Temp / OS / IDE
+.DS_Store
+.idea/
+*.swp
+*~
+~$*
+*.xlsx
+data Sheet*.xlsx
+
+# Optional: keep sample outputs out of repo
+# extracted_output/*.csv

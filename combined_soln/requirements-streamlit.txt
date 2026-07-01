@@ -1,0 +1,8 @@
+# Extra deps for Streamlit app (install in project venv)
+streamlit>=1.28.0
+openai>=1.0.0
+openpyxl>=3.1.0
+pandas>=2.0.0
+requests>=2.28.0
+yfinance>=0.2.0
+tavily-python>=0.5.0
