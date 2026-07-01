@@ -1,53 +1,64 @@
 # Deploy to OpenShift
 
-## Prerequisites
-- Podman (or Docker) with `podman machine start` on Mac
-- `oc` CLI installed
+See **[RUNBOOK.md](RUNBOOK.md)** for the current deploy flow. This file covers image build only.
 
-## 1. Build and Push Image (linux/amd64)
+## Prerequisites
+
+- Podman or Docker
+- `oc` CLI logged into your cluster
+- Quay.io (or your registry) access if pushing images
+
+## 1. Build and push image
+
+**Full Docling + OCR (local parity):**
 
 ```bash
-# Ensure podman machine is running
-podman machine start
-
-# Build for amd64 (required for OpenShift on Mac)
 ./build_and_push.sh
 ```
 
-Or manually:
-```bash
-podman build --platform linux/amd64 -t quay.io/vraste/indian-bank-pnb-kpi:latest .
-podman login quay.io -u vraste
-podman push quay.io/vraste/indian-bank-pnb-kpi:latest
-```
-
-## 2. Deploy to OpenShift
+**Fast mode (OpenShift CPU — tables only, recommended for cluster timeout):**
 
 ```bash
-./deploy_openshift.sh
+./build_and_push_openshift.sh
 ```
 
-Or manually:
+**GPU mode:**
+
 ```bash
-oc login --token=sha256~WIDp1k9_zC0Fstw4eiXWq0jPSsiTUVjmY3LCXB3ENnE --server=https://api.ocp.5gqpx.sandbox203.opentlc.com:6443
-oc new-project indian-bank-kpi 2>/dev/null || oc project indian-bank-kpi
-oc apply -f openshift/deployment.yaml
-oc rollout status deployment/indian-bank-pnb-kpi --timeout=300s
-oc get route indian-bank-pnb-kpi
+./build_and_push_openshift_gpu.sh
 ```
 
-## 3. Access the App
+Default image: `quay.io/vraste/indian-bank-pnb-kpi` with tags `:latest`, `:openshift`, `:openshift-gpu`.  
+Update the image name in build scripts if using your own registry.
 
-After deployment, get the route URL:
+Manual build example:
+
+```bash
+docker build --platform linux/amd64 -t quay.io/YOUR_USER/bank-kpi-analyst:latest .
+docker push quay.io/YOUR_USER/bank-kpi-analyst:latest
+```
+
+## 2. Deploy
+
+```bash
+export OCP_SERVER="https://api.YOUR_CLUSTER:6443"
+export OCP_TOKEN="sha256~YOUR_TOKEN"
+./deploy_openshift_new.sh cpu    # or: gpu
+```
+
+## 3. Get app URL
+
 ```bash
 oc get route indian-bank-pnb-kpi -o jsonpath='{.spec.host}'
 ```
 
 Open `https://<route-host>` in a browser.
 
-## Features Deployed
-- KPI extraction (IB & PNB)
-- RAG with Milvus Lite (milvus.db) + sentence-transformers
-- Entities passed to LLM as JSON (kpis + retrieved_chunks)
-- Web search (Tavily) & Yahoo Finance tools
-- Template report format, drops None rows
+## What gets deployed
+
+- Multi-bank KPI extraction (IB, PNB, HDFC)
+- Streamlit UI with BSE URL download
+- RAG (Milvus Lite) + optional LLM chat
+- Tavily web search + Yahoo Finance tools
+
+Configure LLM/Tavily via environment variables on the deployment if needed.

@@ -1,6 +1,10 @@
 # KPI Extraction + Streamlit RAG App
-# Install PyTorch BEFORE this file — see README Step 2:
-#   pip install torch==2.5.1 torchvision==0.20.1 --index-url https://download.pytorch.org/whl/cpu
+#
+# Setup order (see GETTING_STARTED.md or run ./scripts/setup.sh):
+#   1. python3.11 -m venv .venv && source .venv/bin/activate
+#   2. pip install torch==2.5.1 torchvision==0.20.1 --index-url https://download.pytorch.org/whl/cpu
+#   3. pip install -r requirements.txt
+#
 streamlit>=1.28.0
 pandas>=2.0.0
 openpyxl>=3.1.0

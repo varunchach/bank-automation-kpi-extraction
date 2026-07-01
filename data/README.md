@@ -35,12 +35,22 @@ These PNGs support PNB ratio extraction when table OCR is weak:
 
 ## Quick download (macOS/Linux)
 
+Use the script (includes BSE Referer headers — plain `curl` often returns HTML):
+
+```bash
+./scripts/download_pdfs.sh
+# or: make download
+```
+
+Manual curl with headers:
+
 ```bash
 mkdir -p data
-curl -L -o data/IB_investor_PPT.pdf "https://www.bseindia.com/xml-data/corpfiling/AttachHis/06fc511a-9d0e-43df-a830-13b9dea59cba.pdf"
-curl -L -o data/IB_CASA_Numbers_PPT.pdf "https://www.bseindia.com/xml-data/corpfiling/AttachHis/7b26747e-1f53-4fc5-aa28-465e03617758.pdf"
-curl -L -o data/PNB_investor_PPT.pdf "https://www.bseindia.com/xml-data/corpfiling/AttachHis/aedaff30-a173-45db-ac13-188e1257f05c.pdf"
-curl -L -o data/PNB_CASA_Numbers_PPT.pdf "https://www.bseindia.com/xml-data/corpfiling/AttachHis/2e4de758-cbe7-4e01-82dd-7acca9ec9f2d.pdf"
+UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+curl -fsSL -H "User-Agent: $UA" -H "Referer: https://www.bseindia.com/" \
+  -o data/IB_investor_PPT.pdf \
+  "https://www.bseindia.com/xml-data/corpfiling/AttachHis/06fc511a-9d0e-43df-a830-13b9dea59cba.pdf"
+# … repeat for other URLs in the table above, or use download_pdfs.sh
 ```
 
 Add HDFC PDFs manually when you have the links or files:

@@ -11,12 +11,10 @@ Deploy and run the KPI extraction Streamlit app **locally** or on **OpenShift**.
 ```bash
 git clone https://github.com/varunchach/bank-automation-kpi-extraction.git
 cd bank-automation-kpi-extraction
-python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-./run_local.sh
+make setup && make run
 ```
 
-Open **http://localhost:8501**.
+Open **http://localhost:8501**. See **[GETTING_STARTED.md](GETTING_STARTED.md)** for the full walkthrough.
 
 | Mode | How | Notes |
 |------|-----|-------|
