@@ -18,9 +18,10 @@ RUN echo "App build: ${APP_BUILD}"
 COPY combined_soln/ combined_soln/
 COPY IB/ IB/
 COPY PNB/ PNB/
+COPY HDFC/ HDFC/
 COPY .streamlit/ combined_soln/.streamlit/
 
-ENV PYTHONPATH=/app:/app/IB:/app/PNB
+ENV PYTHONPATH=/app:/app/IB:/app/PNB:/app/HDFC
 WORKDIR /app/combined_soln
 
 ENV STREAMLIT_SERVER_ADDRESS=0.0.0.0

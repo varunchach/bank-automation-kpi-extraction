@@ -43,4 +43,11 @@ curl -L -o data/PNB_investor_PPT.pdf "https://www.bseindia.com/xml-data/corpfili
 curl -L -o data/PNB_CASA_Numbers_PPT.pdf "https://www.bseindia.com/xml-data/corpfiling/AttachHis/2e4de758-cbe7-4e01-82dd-7acca9ec9f2d.pdf"
 ```
 
-Add HDFC PDFs manually when you have the links or files.
+Add HDFC PDFs manually when you have the links or files:
+
+| File | Notes |
+|------|-------|
+| `HDFC_investor_PPT.pdf` | Required for HDFC CLI test (`python HDFC/export_to_csv.py`) |
+| `HDFC_Bank_CASA.pdf` | Required for 3-bank Streamlit/CLI report |
+
+There are no default HDFC BSE URLs in `combined_soln/bse_nse_input.txt` yet — paste URLs in the Streamlit app when available.

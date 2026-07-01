@@ -1,4 +1,4 @@
-# Indian Bank & PNB KPI Analyst - Streamlit + RAG (Milvus)
+# Multi-Bank KPI Analyst - Streamlit + RAG (Milvus)
 # Multi-platform: linux/amd64 (OpenShift, x86) and linux/arm64 (Apple Silicon, ARM)
 
 FROM python:3.11-slim-bookworm
@@ -22,10 +22,11 @@ RUN echo "App build: ${APP_BUILD}"
 COPY combined_soln/ combined_soln/
 COPY IB/ IB/
 COPY PNB/ PNB/
+COPY HDFC/ HDFC/
 COPY .streamlit/ combined_soln/.streamlit/
 
 # Ensure combined_soln is on path
-ENV PYTHONPATH=/app:/app/IB:/app/PNB
+ENV PYTHONPATH=/app:/app/IB:/app/PNB:/app/HDFC
 WORKDIR /app/combined_soln
 
 # Streamlit
